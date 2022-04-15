@@ -11,50 +11,67 @@ Registererd roles
       <div class="card">
         <div class="card-header">
           <h4 class="card-title">Registered roles</h4>
+          <h4>
+            @if (session()->has('success'))
+
+              <div class="alert alert-success">
+                  {{ session()->get('success') }}
+              </div>                              
+            @endif
+        </h4>
         </div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table">
               <thead class=" text-primary">
-                <th>
+               <tr>
+                <th scope="col">
+                  User id 
+                </th>
+                <th scope="col">
                   Name
                 </th>
-                <th>
+                <th scope="col">
                   Phone
                 </th>
-                <th>
+                <th scope="col">
                   Email
                 </th>
-                <th>
+                <th scope="col">
                   User Type
                 </th>
-                <th >
+                <th scope="col">
                   Edit
                 </th>
-                <th >
+                <th scope="col">
                   Delete
                 </th>
+               </tr>
               </thead>
               <tbody>
                   @foreach ( $users as $user )
                     <tr>
-                    <td>
-                        {{ $user->name }}
-                    </td>
-                    <td>
-                        {{ $user->phone }}
-                    </td>
-                    <td>
-                        {{ $user->email }}
-                    <td>
-                    <td>
-                        {{ $user->usertype }}
-                    <td>
-                        <a href="#" class="btn btn-success" >Edit user</a>
-                    </td>
-                    <td >
-                        <a href="#" class="btn btn-danger">Delete user</a>
-                    </td>
+                      <th scope="row">
+                          {{ $user->id }}
+                      </th>
+                      <td>
+                          {{ $user->name }}
+                      </td>
+                      <td>
+                          {{ $user->phone }}
+                      </td>
+                      <td>
+                          {{ $user->email }}
+                      </td>
+                      <td>
+                          {{ $user->usertype }}
+                      </td>
+                      <td>
+                          <a href="{{ route('admin.editRoles',$user->id) }}" class="btn btn-success" >Edit user</a>
+                      </td>
+                      <td >
+                          <a href="{{ route('admin.deleteUser',$user->id) }}" class="btn btn-danger">Delete user</a>
+                      </td>
                     </tr>
                 @endforeach
               </tbody>

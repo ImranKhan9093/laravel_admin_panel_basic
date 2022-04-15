@@ -13,4 +13,18 @@ class DashboardController extends Controller
         $users=User::all();
        return view('admin.registered_roles',compact('users'));
     }
+
+
+    public function editRoles(Request $request,User $user){
+      
+       return view('admin.edit_registered_user',compact('user'));
+    }
+    public function updateRole(Request $request,User $user){
+         
+         $userToBeUpdated=User::find($user->id);
+         $userToBeUpdated->usertype=$request->usertype;
+        $userToBeUpdated->update();
+           
+         return redirect()->route('admin.registeredRoles')->with('success','Role updated successfully');
+    }
 }

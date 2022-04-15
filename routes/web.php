@@ -23,11 +23,19 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::prefix('admin')->name('admin.')->group(function(){
+
    Route::middleware(['admin','auth'])->group(function(){
         Route::get('/dashboard',function(){
             return view('admin.dashboard');
         })->name('dashboard');
+
    Route::get('/registeredRoles',[DashboardController::class,'registeredRoles'])->name('registeredRoles');
+
+   Route::get('/editRoles/{user}',[DashboardController::class,'editRoles'])->name('editRoles');
+   
+   Route::put('/updateRole/{user}',[DashboardController::class,'updateRole'])->name('updateRole');
+   Route::get('/deleteUser/{user}',[DashboardController::class,'deleteUser'])->name('deleteUser');
+
    });
    
 });
