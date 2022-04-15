@@ -53,7 +53,7 @@
       <div class="sidebar-wrapper" id="sidebar-wrapper">
         <ul class="nav">
           <li>
-            <a href="./dashboard.html">
+            <a href="{{ route('admin.dashboard') }}">
               <i class="now-ui-icons design_app"></i>
               <p>Dashboard</p>
             </a>
@@ -77,13 +77,13 @@
             </a>
           </li>
           <li>
-            <a href="./user.html">
+            <a href="{{ route('admin.registeredRoles') }}">
               <i class="now-ui-icons users_single-02"></i>
               <p>User Profile</p>
             </a>
           </li>
           <li class="active ">
-            <a href="./tables.html">
+            <a href="#">
               <i class="now-ui-icons design_bullet-list-67"></i>
               <p>Table List</p>
             </a>
@@ -144,7 +144,7 @@
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="now-ui-icons location_world"></i>
+                  <i >{{ Auth::user() ->name}}</i>
                   <p>
                     <span class="d-lg-none d-md-block">Some Actions</span>
                   </p>
@@ -156,9 +156,7 @@
                   <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout').submit();">Logout</a>
                   <form method="POST" action="{{ route('logout') }}" id="logout">
                     @csrf
-
-                    
-                </form>
+                  </form>
                 </div>
               </li>
               <li class="nav-item">
