@@ -96,7 +96,7 @@ class AboutUsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Abouts $aboutu)
-    {   
+    { 
         $aboutu->delete();
         return redirect()->route('admin.aboutus.index')->with('success','Data deleted succesfully');
 

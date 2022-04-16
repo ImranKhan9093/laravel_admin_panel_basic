@@ -12,10 +12,10 @@ About us
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+          <h4 class="card-title">New About us </h4>
+          <button type="button" class="btn-close float-right" data-bs-dismiss="modal" aria-label="Close">X</button>
         </div>
-        <h4 class="card-title">New About us</h4>
+        
       <form action="{{ route('admin.aboutus.store') }}" method="POST">
           @csrf
             <div class="modal-body">
@@ -57,7 +57,33 @@ About us
       </div>
     </div>
   </div>
-
+ {{-- Delete confirmation modal --}}
+    <div class="modal fade" id="deleteModalPopup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+             <h5 class="card-title">Delete Confirmation</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+          </div>
+          <form id="deleteAboutForm"  method="POST">
+                @csrf
+                @method('DELETE')
+              
+            
+            <div class="modal-body">
+              <h6 class="modal-title" id="exampleModalLabel">Are you sure to delete?</h6>
+              {{-- <input type="hidden" id="deleteModalAboutId"> --}}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Confirm deletion</button>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+{{-- End delete confirmation modal --}}
+ 
 <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -119,11 +145,7 @@ About us
                                 <a href="{{ route('admin.aboutus.edit',$aboutus->id) }}" class="btn btn-success">Edit</a> 
                             </td>
                             <td>
-                                <form action="{{ route('admin.aboutus.destroy',$aboutus->id) }}" method="POST">
-                                  @csrf
-                                  @method('DELETE')
-                                  <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
+                                <a id="deletebtn" href="javascript:void(0)" class="btn btn-danger" >Delete</a>
                             </td>
                         </tr>
                 @endforeach
@@ -144,6 +166,23 @@ About us
 
     $(document).ready( function () {
       $('#dataTable').DataTable();
+
+     $('#dataTable').on('click','#deletebtn',function () {
+         
+         var tr = $(this).closest('tr');
+
+       var data= tr.children('td').map(function(){
+
+         return $(this).text();
+
+       }).get();
+
+      
+      
+      //  $('#deleteModalAboutId').val(data[0]);
+       $('#deleteAboutForm').attr('action','/admin/aboutus/'+data[0]);
+       $('#deleteModalPopup').modal('show');
+     });
     });
 
 </script>
