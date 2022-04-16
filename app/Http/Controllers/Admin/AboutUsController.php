@@ -44,6 +44,8 @@ class AboutUsController extends Controller
            ]);
 
            Abouts::create($validated);
+           session()->flash('sweetAlertIcon','success');
+
           return redirect()->route('admin.aboutus.index')->with('success','Data added succesfully');         
     }
 
@@ -86,6 +88,7 @@ class AboutUsController extends Controller
         ]);
 
         $aboutu->update($validated);
+        session()->flash('sweetAlertIcon','info');
        return redirect()->route('admin.aboutus.index')->with('success','Data updated succesfully');
     }
 
@@ -98,6 +101,7 @@ class AboutUsController extends Controller
     public function destroy(Abouts $aboutu)
     { 
         $aboutu->delete();
+        session()->flash('sweetAlertIcon','error');
         return redirect()->route('admin.aboutus.index')->with('success','Data deleted succesfully');
 
     }  

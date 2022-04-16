@@ -216,6 +216,8 @@
   <script src="{{ URL('assets/js/core/bootstrap.min.js') }}"></script>
   <script src="{{ URL('assets/js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
   <script src="{{ URL('assets/js/dataTables.min.js') }}"></script>
+  <script src="{{ URL('assets/js/sweet-alert.js') }}"></script>
+  
   <!--  Google Maps Plugin    -->
   <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
   <!-- Chart JS -->
@@ -226,7 +228,20 @@
   <script src="{{ URL('assets/js/now-ui-dashboard.min.js?v=1.5.0') }}" type="text/javascript"></script><!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
   <script src="{{ URL('assets/demo/demo.js') }}"></script>
   
+   @if (session()->has('success'))
+   <script>
+      $(document).ready(function() { 
+           swal({
+             title: "{{ session()->get('success') }}",
+             // text: "You clicked the button!",
+             icon: "{{ session()->get('sweetAlertIcon') }}",
+             button: "OK",
+           });
 
+     });
+ </script>
+       
+   @endif
   @yield('scripts')
 
 </body>

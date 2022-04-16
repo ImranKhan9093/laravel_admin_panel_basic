@@ -95,14 +95,6 @@ About us
         <div class="card-body">
           <div class="table-responsive">
 
-
-            @if (session()->has('success'))
-                <div class="alert alert-success">
-                    {{ session()->get('success') }} 
-                </div>
-            @endif
-
-
             <table id="dataTable" class="table">
               <thead class=" text-primary">
                 <th>
