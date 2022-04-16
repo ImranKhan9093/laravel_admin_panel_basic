@@ -70,8 +70,8 @@
               <p>Maps</p>
             </a>
           </li>
-          <li class="{{ request()->routeIs('admin.aboutUs.index') ? 'active' : '' }}">
-            <a href="{{ route('admin.aboutUs.index') }}">
+          <li class="{{ request()->routeIs('admin.aboutus.index') ? 'active' : '' }}">
+            <a href="{{ route('admin.aboutus.index') }}">
               <i class="now-ui-icons ui-1_bell-53"></i>
               <p>About us</p>
             </a>

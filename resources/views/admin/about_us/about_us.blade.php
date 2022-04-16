@@ -12,10 +12,11 @@ About us
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">New about</h5>
+          
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
         </div>
-      <form action="{{ route('admin.aboutUs.store') }}" method="POST">
+        <h4 class="card-title">New About us</h4>
+      <form action="{{ route('admin.aboutus.store') }}" method="POST">
           @csrf
             <div class="modal-body">
             
@@ -115,10 +116,10 @@ About us
                                 {{ $aboutus->description }}
                             </td>
                             <td>
-                                <a href="{{ route('admin.aboutUs.edit',$aboutus->id) }}" class="btn btn-success">Edit</a> 
+                                <a href="{{ route('admin.aboutus.edit',$aboutus->id) }}" class="btn btn-success">Edit</a> 
                             </td>
                             <td>
-                                <a href="{{ route('admin.aboutUs.destroy',$aboutus->id) }}" class="btn btn-danger">Delete</a> 
+                                <a href="{{ route('admin.aboutus.destroy',$aboutus->id) }}" class="btn btn-danger">Delete</a> 
                             </td>
                         </tr>
                 @endforeach

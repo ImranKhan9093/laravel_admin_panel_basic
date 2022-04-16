@@ -16,7 +16,7 @@ class AboutUsController extends Controller
     public function index()
     {   
         $aboutusData=Abouts::all();
-        return view('admin.about_us',compact('aboutusData'));
+        return view('admin.about_us.about_us',compact('aboutusData'));
     }
 
     /**
@@ -44,7 +44,7 @@ class AboutUsController extends Controller
            ]);
 
            Abouts::create($validated);
-          return redirect()->route('admin.aboutUs.index')->with('success','Data added succesfully');         
+          return redirect()->route('admin.aboutus.index')->with('success','Data added succesfully');         
     }
 
     /**
@@ -53,7 +53,7 @@ class AboutUsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Abouts $aboutu)
     {
         //
     }
@@ -64,9 +64,10 @@ class AboutUsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit(Abouts $aboutu)
+    {     $aboutus=$aboutu;
+       
+        return view('admin.about_us.edit',compact('aboutus'));
     }
 
     /**
@@ -76,9 +77,16 @@ class AboutUsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Abouts $aboutu)
     {
-        //
+        $validated= $request->validate([
+            'title'=>['required','string'],
+            'subtitle'=>['required','string'],
+            'description'=>['required','string']
+        ]);
+
+        $aboutu->update($validated);
+       return redirect()->route('admin.aboutus.index')->with('success','Data updated succesfully');
     }
 
     /**
@@ -87,8 +95,8 @@ class AboutUsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Abouts $aboutu)
     {
         //
-    }
+    }  
 }
