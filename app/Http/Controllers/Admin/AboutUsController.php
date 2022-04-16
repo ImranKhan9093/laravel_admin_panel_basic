@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Abouts;
 use Illuminate\Http\Request;
 
 class AboutUsController extends Controller
@@ -13,8 +14,9 @@ class AboutUsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('admin.about_us');
+    {   
+        $aboutusData=Abouts::all();
+        return view('admin.about_us',compact('aboutusData'));
     }
 
     /**
@@ -35,7 +37,14 @@ class AboutUsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+          $validated= $request->validate([
+               'title'=>['required','string'],
+               'subtitle'=>['required','string'],
+               'description'=>['required','string']
+           ]);
+
+           Abouts::create($validated);
+          return redirect()->route('admin.aboutUs.index')->with('success','Data added succesfully');         
     }
 
     /**

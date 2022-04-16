@@ -12,25 +12,47 @@ About us
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <h5 class="modal-title" id="exampleModalLabel">New about</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
         </div>
-        <div class="modal-body">
-          <form>
-            <div class="mb-3">
-              <label for="recipient-name" class="col-form-label">Recipient:</label>
-              <input type="text" class="form-control" id="recipient-name">
+      <form action="{{ route('admin.aboutUs.store') }}" method="POST">
+          @csrf
+            <div class="modal-body">
+            
+                <div class="mb-3">
+                    <label for="title" class="col-form-label">Title:</label>
+                    <input type="text" class="form-control" id="title" name="title">
+                    @error('title')
+                        <div class="alert alert-danger">
+                            <span>{{ $message }}</span>
+                        </div>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="subtitle" class="col-form-label">Subtitle:</label>
+                    <input type="text" class="form-control" id="subtitle" name="subtitle">
+                    @error('subtitle')
+                        <div class="alert alert-danger">
+                            <span>{{ $message }}</span>
+                        </div>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="col-form-label">Description:</label>
+                    <textarea class="form-control" id="description" name="description"></textarea>
+                    @error('description')
+                        <div class="alert alert-danger">
+                            <span>{{ $message }}</span>
+                        </div>
+                    @enderror
+                </div>
+            
             </div>
-            <div class="mb-3">
-              <label for="message-text" class="col-form-label">Message:</label>
-              <textarea class="form-control" id="message-text"></textarea>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Add</button>
             </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Send message</button>
-        </div>
+       </form>
       </div>
     </div>
   </div>
@@ -45,6 +67,15 @@ About us
         </div>
         <div class="card-body">
           <div class="table-responsive">
+
+
+            @if (session()->has('success'))
+                <div class="alert alert-success">
+                    {{ session()->get('success') }} 
+                </div>
+            @endif
+
+
             <table class="table">
               <thead class=" text-primary">
                 <th>
@@ -54,7 +85,7 @@ About us
                   Title
                 </th>
                 <th>
-                  SUbtitle
+                  Subtitle
                 </th>
                 <th>
                   Description
@@ -67,26 +98,30 @@ About us
                 </th>
               </thead>
               <tbody>
-                <tr>
-                  <td>
-                   1
-                  </td>
-                  <td>
-                    about title
-                  </td>
-                  <td>
-                   about subtitle
-                  </td>
-                  <td >
-                   about description
-                  </td>
-                  <td>
-                     <a href="" class="btn btn-sucess">Edit</a> 
-                  </td>
-                  <td>
-                    <a href="" class="btn btn-danger">Delete</a> 
-                 </td>
-                </tr>
+
+                @foreach ($aboutusData as $aboutus)
+                    
+                        <tr>
+                            <td>
+                                {{ $aboutus->id }}
+                            </td>
+                            <td>
+                                {{ $aboutus->title }}
+                            </td>
+                            <td>
+                                {{ $aboutus->subtitle }}
+                            </td>
+                            <td >
+                                {{ $aboutus->description }}
+                            </td>
+                            <td>
+                                <a href="{{ route('admin.aboutUs.edit',$aboutus->id) }}" class="btn btn-success">Edit</a> 
+                            </td>
+                            <td>
+                                <a href="{{ route('admin.aboutUs.destroy',$aboutus->id) }}" class="btn btn-danger">Delete</a> 
+                            </td>
+                        </tr>
+                @endforeach
               </tbody>
             </table>
           </div>
