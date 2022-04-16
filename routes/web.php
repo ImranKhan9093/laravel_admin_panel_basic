@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AboutUsController;
 use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +36,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
    
    Route::put('/updateRole/{user}',[DashboardController::class,'updateRole'])->name('updateRole');
    Route::delete('/deleteUser/{user}',[DashboardController::class,'deleteUser'])->name('deleteUser');
+
+    Route::resource('/aboutUs',AboutUsController::class);
 
    });
    

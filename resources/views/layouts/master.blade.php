@@ -70,10 +70,10 @@
               <p>Maps</p>
             </a>
           </li>
-          <li>
-            <a href="./notifications.html">
+          <li class="{{ request()->routeIs('admin.aboutUs.index') ? 'active' : '' }}">
+            <a href="{{ route('admin.aboutUs.index') }}">
               <i class="now-ui-icons ui-1_bell-53"></i>
-              <p>Notifications</p>
+              <p>About us</p>
             </a>
           </li>
           <li class="{{ request()->routeIs('admin.registeredRoles') ? 'active': '' }}">
