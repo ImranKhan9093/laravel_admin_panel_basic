@@ -119,7 +119,11 @@ About us
                                 <a href="{{ route('admin.aboutus.edit',$aboutus->id) }}" class="btn btn-success">Edit</a> 
                             </td>
                             <td>
-                                <a href="{{ route('admin.aboutus.destroy',$aboutus->id) }}" class="btn btn-danger">Delete</a> 
+                                <form action="{{ route('admin.aboutus.destroy',$aboutus->id) }}" method="POST">
+                                  @csrf
+                                  @method('DELETE')
+                                  <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
                             </td>
                         </tr>
                 @endforeach
