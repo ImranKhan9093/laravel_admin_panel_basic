@@ -52,7 +52,7 @@
       </div>
       <div class="sidebar-wrapper" id="sidebar-wrapper">
         <ul class="nav">
-          <li>
+          <li class="{{ request()->routeIs('admin.dashboard')? 'active': '' }}">
             <a href="{{ route('admin.dashboard') }}">
               <i class="now-ui-icons design_app"></i>
               <p>Dashboard</p>
@@ -76,13 +76,13 @@
               <p>Notifications</p>
             </a>
           </li>
-          <li>
+          <li class="{{ request()->routeIs('admin.registeredRoles') ? 'active': '' }}">
             <a href="{{ route('admin.registeredRoles') }}">
               <i class="now-ui-icons users_single-02"></i>
               <p>User Profile</p>
             </a>
           </li>
-          <li class="active ">
+          <li >
             <a href="#">
               <i class="now-ui-icons design_bullet-list-67"></i>
               <p>Table List</p>
