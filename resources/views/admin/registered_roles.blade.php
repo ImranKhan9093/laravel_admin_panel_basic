@@ -64,13 +64,18 @@ Registererd roles
                           {{ $user->email }}
                       </td>
                       <td>
-                          {{ $user->usertype }}
+                          {{ $user->usertype??"No role assigned" }}
                       </td>
                       <td>
                           <a href="{{ route('admin.editRoles',$user->id) }}" class="btn btn-success" >Edit user</a>
                       </td>
                       <td >
-                          <a href="{{ route('admin.deleteUser',$user->id) }}" class="btn btn-danger">Delete user</a>
+                          <form action="{{ route('admin.deleteUser',$user->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            
+                            <button type="submit" class="btn btn-danger">Delete user</button>
+                          </form>
                       </td>
                     </tr>
                 @endforeach

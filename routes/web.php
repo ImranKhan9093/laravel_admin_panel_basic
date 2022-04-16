@@ -34,7 +34,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
    Route::get('/editRoles/{user}',[DashboardController::class,'editRoles'])->name('editRoles');
    
    Route::put('/updateRole/{user}',[DashboardController::class,'updateRole'])->name('updateRole');
-   Route::get('/deleteUser/{user}',[DashboardController::class,'deleteUser'])->name('deleteUser');
+   Route::delete('/deleteUser/{user}',[DashboardController::class,'deleteUser'])->name('deleteUser');
 
    });
    

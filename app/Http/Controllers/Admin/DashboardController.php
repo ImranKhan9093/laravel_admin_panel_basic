@@ -23,8 +23,14 @@ class DashboardController extends Controller
          
          $userToBeUpdated=User::find($user->id);
          $userToBeUpdated->usertype=$request->usertype;
-        $userToBeUpdated->update();
+         $userToBeUpdated->update();
            
          return redirect()->route('admin.registeredRoles')->with('success','Role updated successfully');
+    }
+    public function deleteUser(User $user){
+       
+        $user->delete();
+        return redirect()->route('admin.registeredRoles')->with('success','User deleted');
+
     }
 }
